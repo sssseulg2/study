@@ -1,0 +1,50 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 700px;
+    padding: auto;
+    margin: 50px auto;
+    box-shadow: 10px 10px 30px gray;
+    border-radius: 10px;
+    background-color: #bbccee;
+    background-size: cover;
+}
+.login-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 30%;
+    height: 40%;
+}
+#username {
+    width: 100%;
+    height: 70px;
+    padding-left: 30px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+#password {
+    width: 100%;
+    height: 70px;
+    padding-left: 30px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+#btn-submit {
+    width: 30%;
+    height: 50px;
+    background: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fafafa;
+    cursor: pointer;
+}
+input {
+    border: none;
+    border-radius: 10px;
+}
+input:focus {
+    outline: none;
+}
