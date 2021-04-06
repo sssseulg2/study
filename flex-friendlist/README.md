@@ -1,7 +1,5 @@
 flex friend list
 ------
-#### 구현 화면
-
 flex 속성을 이용한 friend list 구현
 
 #### 구현 화면
