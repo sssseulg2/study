@@ -1,5 +1,5 @@
 flex friend list
-------
+=========
 flex 속성을 이용한 friend list 구현
 
 <br>
