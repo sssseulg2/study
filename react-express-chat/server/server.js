@@ -11,10 +11,10 @@ const socketio = require('socket.io');
 app.io = socketio(server);
 
 const authUser = [
-  ['seulgi1', '1111'],
-  ['seulgi3', '3333'],
-  ['seulgi2', '2222'],
-  ['seulgi4', '4444']
+  ['김준경', '1111'],
+  ['이슬기', '2222'],
+  ['권지형', '3333'],
+  ['슬기', '4444']
 ]
 
 app.use(bodyParser.urlencoded({ extended: false }));
