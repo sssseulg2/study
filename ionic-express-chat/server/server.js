@@ -1,13 +1,16 @@
-// 이게 서버에요
 const express = require('express');
-const app = express();
 const cors = require('cors');
 const http =require('http');
+const bodyParser = require('body-parser');
 const port = 3030;
 
-app.use(express.json());
-app.use(cors());
-app.options('*',cors());
+const app = express();
+const server = http.createServer(app);
+server.listen(port);
+
+const socket = require('socket.io');
+app.io = socket(server);
+// socket = socket.listen(server);
 
 const authUser = [
     {
@@ -24,6 +27,13 @@ const authUser = [
     }
 ]
 
+app.use(express.json());
+app.use(cors());
+app.options('*',cors());
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.get('/', (req, res, next) => {
     res.send('hi');
 });
@@ -36,68 +46,35 @@ app.post('/auth', (req, res, next) => {
     for(i=0; i<authUser.length; i++) {
         if (authUser[i].username === username) {
           if (authUser[i].password === password) {
-            res.end("Success");
+            res.end("성공");
+            return;
           }
         }
       }
-    
-    res.send('실패');
-    //res.end("로그인 성공");
+    res.send("실패");
+    return;
 });
 
-let server = http.createServer(app);
-server.listen(port);
 
 server.on('listening', () => {
-    console.log(`server listening on port ${port}`)
+  console.log(`server listening on port ${port}`)
 })
 
-server.on('error', ()=> {
-
-})
-
-//44줄에서 가져오기
-app.io = require('socket.io')(server);
-var socketList = [];
-
-app.io.sockets.on('connection', (socket) => {
-  console.log('socket connect !');
-  socketList.push(socket);
-
-//   socket.on('newUserConnect', function (name) {
-//     if (name != null) {
-//       socket.name = name;
-
-//       var message = name + '님이 입장하였습니다.';
-
-//       app.io.sockets.emit('updateMessage', {
-//         name: 'SERVER',
-//         message: message
-//       });
-//     }
-
-//   });
-
-  socket.on('disconnect', () => {
-    console.log('socket disconnect !');
-    socketList.splice(socketList.indexOf(socket), 1);
-    var message = socket.name + '님이 퇴장하였습니다.';
-    if (socket.name != null) {
-      socket.broadcast.emit('updateMessage', {
-        name: 'SERVER',
-        message: message
-      });
-    }
+app.io.on('connection', (socket) => {
+  console.log("@@연결")
+ 
+  socket.on('newUser', (name) => {
+    socket.username = name;
+    console.log(socket.username + "입장");
+    app.io.sockets.emit('userChange', {username: 'server', message: `${socket.username}님이 입장했습니다.`});    
   });
 
-  socket.on('sendMessage', function (data) { 
-    data.name = socket.name;
-    socketList.forEach(function (item, i) {
-      if (item == socket) {
-        data.me = 'true';
-      }
-    });
-    app.io.sockets.emit('updateMessage', data);
-
+  socket.on('disconnect', function(){
+    console.log(socket.username + "퇴장")
+    app.io.sockets.emit('userChange', {username: 'server', message: `${socket.username}님이 퇴장했습니다.`});   
+  });
+  
+  socket.on('send', (data) => {
+    app.io.sockets.emit('newChat', { username: socket.username, message: data.message });    
   });
 });
