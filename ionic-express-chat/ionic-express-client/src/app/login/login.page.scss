@@ -1,0 +1,41 @@
+.login {
+    .login-wrap {
+        width: 80%;
+        margin: 300px auto 50px auto;
+        #username {
+            width: 100%;
+            height: 50px;
+            padding-left: 30px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            font-size: 20px;
+        }
+        #password {
+            width: 100%;
+            height: 50px;
+            padding-left: 30px;
+            background-color: #ffffff;
+            font-size: 20px;
+        }
+    }
+    .btn-wrap {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        #btn-enter {
+            width: 100px;
+            height: 40px;
+            background-color: #6c7ddb;
+            border-radius: 20px;
+        }
+    }
+}
+input {
+    border: none;
+    border-radius: 10px;
+    color: #222222;
+
+    :focus {
+        outline: none;
+    }
+}

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="login">
+  <div class="login-wrap">
+    <div class="username-wrap">
+      <input id="username" type="text" [(ngModel)]="username" [placeholder]="usernamePlaceHolder"/>
+    </div>
+    <div class="password-wrap">
+      <input id="password" type="password" [(ngModel)]="password" [placeholder]="passwordPlaceHolder"/>
+    </div>
+  </div>
+  <div class="btn-wrap">
+    <input id="btn-enter" type="submit" value="Enter" (click)="login()">
+  </div>
+</ion-content>

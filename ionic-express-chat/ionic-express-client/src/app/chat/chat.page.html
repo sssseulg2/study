@@ -1,0 +1,26 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="chat-container">
+    <div class="chat-view" *ngFor="let chat of messages">
+      <div *ngIf="chat.username == 'server'" class="information">{{ chat.message }}</div>
+      <div *ngIf="chat.username == this.username" class="my-chat message-wrap">
+        <div class="username"> {{ chat.username }} </div>
+        <div class="message">{{ chat.message }}</div>
+      </div>
+      <div *ngIf="chat.username !== this.username && chat.username !== 'server'" class="your-chat message-wrap">
+        <div class="message">{{ chat.message }} </div>
+        <div class="username"> {{ chat.username }} </div>
+      </div>
+    </div>
+    <div class="enter-form">
+      <input type="text" id="message" [(ngModel)]="message" (keyup.enter)="send()">
+      <input type="submit" value="Send" id="send" (click)="send()">
+    </div>
+  </div>
+</ion-content>
