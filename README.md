@@ -10,3 +10,7 @@ div 태그 속 flex 속성을 통해
 axios 이용한 로그인 ( DB 없이 ) 기능 구현
 socket.io 이용한 채팅 기능 구현
 ```
+ ### 3. ionic express chat
+```
+2번의 기능을 ionic(angular)으로 재구현
+```
